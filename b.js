@@ -16,6 +16,7 @@ console.log(num.toFixed(2));
 console.log(num.toPrecision(4));
 
 let numObj = 5.123456;
+//当使用toPrecision方法的时候，如果值的小数点大于指定小数点，那么就会采用四舍五入方法进行计算，会出现向上向下取证
 console.log(numObj.toPrecision())    // logs '5.123456'
 console.log(numObj.toPrecision(3))   // logs '5.1235'
 console.log(numObj.toPrecision(2))   // logs '5.1'
