@@ -11,3 +11,6 @@ then((results) => console.log(results));
         { status: 'fulfilled', value: 'name' }
     ]
 */
+const num = 10;
+console.log(num.toFixed(2));
+console.log(num.toPrecision(4));
