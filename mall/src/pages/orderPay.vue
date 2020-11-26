@@ -1,5 +1,7 @@
 <template>
-  
+  <div>
+    orderpay
+  </div>
 </template>
 
 <script>

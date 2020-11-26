@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <div>
+    orderconfirm
+  </div>
+</template>
 
 <script>
 export default {
