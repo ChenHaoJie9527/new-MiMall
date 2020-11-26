@@ -35,12 +35,12 @@ export default new VueRouter({
             component: ()=> import("../pages/order.vue"),
             children: [
                 {
-                    path: "/list",
+                    path: "list",
                     name: "order-list",
                     component: () => import("../pages/orderList.vue")
                 },
                 {
-                    path: "/pay",
+                    path: "pay",
                     name: "order-pay",
                     component: () => import("../pages/orderPay.vue")
                 },
@@ -48,6 +48,11 @@ export default new VueRouter({
                     path: "confirm",
                     name: "order-confirm",
                     component: () => import("../pages/orderConfirm.vue")
+                },
+                {
+                    path: "alipay",
+                    name: "order-alipay",
+                    component: () => import("../pages/aliPay.vue")
                 }
             ]
         },
@@ -55,6 +60,6 @@ export default new VueRouter({
             path: "/login",
             name: "login",
             component: () => import("../pages/login.vue")
-        }
+        },
     ]
 })
