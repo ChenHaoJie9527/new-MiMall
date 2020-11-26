@@ -6,6 +6,7 @@ export default new VueRouter({
             path: "/",
             name: "home",
             component: () => import("../pages/home.vue"),
+            redirect: "/index",
             children: [{
                     path: "/index",
                     name: "index",
@@ -17,7 +18,7 @@ export default new VueRouter({
                     component: () => import("../pages/product.vue")
                 },
                 {
-                    path: "/detail:id",
+                    path: "/detail/:id",
                     name: "detail",
                     component: () => import("../pages/detail.vue")
                 }

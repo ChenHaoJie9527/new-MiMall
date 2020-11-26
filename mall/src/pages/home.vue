@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-header></nav-header>
-      <router-view></router-view>
+    <router-view></router-view>
     <nav-footer></nav-footer>
   </div>
 </template>
@@ -10,8 +10,11 @@
 import NavHeader from "../components/NavHeader.vue";
 import NavFooter from "../components/NavFooter.vue";
 export default {
-  components: { NavHeader, NavFooter },
-  name: "home"
+  components: {
+    NavHeader,
+    NavFooter,
+  },
+  name: "nav-home",
 };
 </script>
 

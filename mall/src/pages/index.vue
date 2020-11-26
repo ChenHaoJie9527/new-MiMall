@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: "main-index"
+    name: "index"
 }
 </script>
 
