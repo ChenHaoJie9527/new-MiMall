@@ -18,7 +18,7 @@ export default {
     // const res = await axios.get("https://www.easy-mock.com/mock/5fbe19b90295b12de9e9a472/example/mock");
     // console.log(res)
     // jsonp在技术上是一个函数，但在跨域通信方面是一段脚本JS，并不是一个请求，因此往往是通过回调函数中的参数进行传输数据
-    const url = "https://www.imooc.com/search/hotwords";
+    const url = "/api/search/hotwords";
     jsonp(url,(error,data)=>{
       console.log(data);
     })
