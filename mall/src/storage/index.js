@@ -23,9 +23,9 @@ class Storage {
     clear(key, module_name) {
         let val = this.getStorage();
         if(module_name){
-            delete val[key][module_name];
+            delete val[key]?.[module_name]??undefined;
         }else {
-            delete val[key]
+            delete val[key]??undefined;
         }
         window.sessionStorage.setItem(STORAGE_KEY,JSON.stringify(val))
     }
