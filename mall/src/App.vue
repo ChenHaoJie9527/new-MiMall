@@ -7,10 +7,10 @@
 <script>
 // import axios from "axios";
 // import jsonp from "jsonp";
+// import { storage } from "./storage/index";
 export default {
-  name: 'App',
-  components: {
-  },
+  name: "App",
+  components: {},
   async created() {
     // const res = await axios.get("https://www.easy-mock.com/mock/5fbe19b90295b12de9e9a472/example/mock");
     // console.log(res)
@@ -19,8 +19,10 @@ export default {
     // jsonp(url,(error,data)=>{
     //   console.log(data);
     // })
+    // console.log(storage.getItem("user"));
+    // console.log(storage.clear("user","age"));
   },
-}
+};
 </script>
 
 <style>
