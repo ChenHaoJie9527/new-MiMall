@@ -13,11 +13,10 @@ export default {
     // this.axios.get("/mock/user/login.json").then(res=>{
     //   console.log(res);
     // })
-    // 本地集成mock数据，在请求发出会被拦截
-    this.axios.get("/user/login").then(res=>{
-      console.log(res);
-    })
-    
+    // 通过easy-mock获取远程数据
+    // this.axios.get("/user/login").then(res=>{
+    //   console.log(res);
+    // })
   },
 };
 </script>
