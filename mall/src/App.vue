@@ -10,9 +10,14 @@ export default {
   components: {},
   async created() {
     // 1.本地加载请求静态json数据
-    this.axios.get("/mock/user/login.json").then(res=>{
+    // this.axios.get("/mock/user/login.json").then(res=>{
+    //   console.log(res);
+    // })
+    // 本地集成mock数据，在请求发出会被拦截
+    this.axios.get("/user/login").then(res=>{
       console.log(res);
     })
+    
   },
 };
 </script>
