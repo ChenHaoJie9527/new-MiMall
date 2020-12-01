@@ -9,14 +9,7 @@ export default {
   name: "App",
   components: {},
   async created() {
-    // 1.本地加载请求静态json数据
-    // this.axios.get("/mock/user/login.json").then(res=>{
-    //   console.log(res);
-    // })
-    // 通过easy-mock获取远程数据
-    // this.axios.get("/user/login").then(res=>{
-    //   console.log(res);
-    // })
+   
   },
 };
 </script>
