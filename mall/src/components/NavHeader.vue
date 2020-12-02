@@ -38,7 +38,7 @@
         </div>
         <div class="header-search">
           <div class="wraper">
-            <input type="text" name="keyword">
+            <input type="text" name="keyword" />
             <a href="javascript:;"></a>
           </div>
         </div>
@@ -55,6 +55,7 @@ export default {
 
 <style lang="scss">
 @import "./../assets/scss/base.scss";
+@import "../assets/scss/mixin.scss";
 .header {
   .nav-topbar {
     height: 39px;
@@ -65,25 +66,19 @@ export default {
       width: 1226px;
       margin-right: auto;
       margin-left: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flex();
       .topbar-menu {
         a {
           margin-right: 18px;
           color: #b0b0b0;
-          &:hover {
-            color: #ff6600;
-          }
+          @include hoverColor();
         }
       }
       .topbar-user {
         a {
           margin-left: 18px;
           color: #b0b0b0;
-          &:hover {
-            color: #ff6600;
-          }
+          @include hoverColor();
         }
         .my-cart {
           width: 110px;
@@ -91,15 +86,10 @@ export default {
           text-align: center;
           display: inline-block;
           color: #fff;
-          &:hover {
-            background: #999999;
-          }
+          @include hoverBgColor();
           .icon-cart {
             display: inline-block;
-            background: url("/imgs/icon-cart-checked.png") no-repeat center;
-            background-size: contain;
-            width: 16px;
-            height: 12px;
+            @include bgImg("/imgs/icon-cart-checked.png" ，16px, 12px);
             margin-right: 4px;
           }
         }
@@ -109,9 +99,7 @@ export default {
   .nav-header {
     .container {
       height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      @include flex();
       .header-log {
         display: inline-block;
         width: 55px;
@@ -125,66 +113,53 @@ export default {
           &:before {
             content: "";
             display: inline-block;
-            width: 55px;
-            height: 55px;
-            background: url("../../public/imgs/mi-logo.png") no-repeat center;
-            background-size: 55px;
-            transition: margin 1s ease;
+            @include bgImg("../../public/imgs/mi-logo.png", 55px, 55px);
+            @include transition();
           }
           &:after {
             content: "";
             display: inline-block;
-            width: 55px;
-            height: 55px;
-            background: url("../../public/imgs/mi-home.png") no-repeat center;
-            background-size: 55px;
+            @include bgImg("../../public/imgs/mi-home.png",55px,55px);
           }
           &:hover:before {
             margin-left: -55px;
-            transition: margin 1s ease;
+            @include transition();
           }
         }
       }
       .header-menu {
-        display: flex;
+        @include flex();
         padding-left: 166px;
         width: 300px;
         color: #333333;
         font-size: 16px;
         font-weight: 700;
-        align-items: center;
-        justify-content: space-between;
         font-family: FZLTHJW;
         .item-menu {
           cursor: pointer;
-          &:hover {
-            color: #ff6600;
-          }
+          @include hoverBgColor();
         }
       }
       .header-search {
         width: 320px;
-        margin-left: 370px;
+        margin-left: 330px;
         .wraper {
           height: 50px;
-          border: 1px solid #E0E0E0;
+          border: 1px solid #e0e0e0;
           display: flex;
           align-items: center;
           cursor: pointer;
-          input{
+          input {
             border: none;
-            border-right: 1px #E0E0E0 solid;
+            border-right: 1px #e0e0e0 solid;
             width: 264px;
             height: 50px;
             padding-left: 14px;
             box-sizing: border-box;
           }
-          a{
+          a {
             display: inline-block;
-            width: 18px;
-            height: 18px;
-            background: url("/imgs/icon-search.png") no-repeat center;
-            background-size: contain;
+            @include bgImg("/imgs/icon-search.png",18px,18px);
             margin-left: 18px;
           }
         }

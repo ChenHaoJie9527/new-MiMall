@@ -1,0 +1,25 @@
+@mixin flex($sp: space-between,$al: center) {
+    display: flex;
+    justify-content: $sp;
+    align-items: $al;
+};
+@mixin hoverColor($color: #ff6600) {
+    &:hover{
+        color: $color;
+    }
+};
+@mixin hoverBgColor($bg: #999) {
+    &:hover{
+        background: $bg;
+    }
+};
+@mixin transition($target: margin, $time: 1s, $mode: ease) {
+    transition: $target $time $mode;
+};
+@mixin bgImg($url: "", $wd: 0px, $hg: 0px, $size: contain) {
+    background: url($url) no-repeat center;
+    background-size: $size;
+    width: $wd;
+    height: $hg;
+};
+
