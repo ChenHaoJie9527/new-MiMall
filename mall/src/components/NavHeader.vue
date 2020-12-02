@@ -67,12 +67,18 @@ export default {
         a {
           margin-right: 18px;
           color: #b0b0b0;
+          &:hover {
+            color: #ff6600;
+          }
         }
       }
       .topbar-user {
         a {
           margin-left: 18px;
           color: #b0b0b0;
+          &:hover {
+            color: #ff6600;
+          }
         }
         .my-cart {
           width: 110px;
@@ -80,6 +86,9 @@ export default {
           text-align: center;
           display: inline-block;
           color: #fff;
+          &:hover {
+            background: #999999;
+          }
           .icon-cart {
             display: inline-block;
             background: url("/imgs/icon-cart-checked.png") no-repeat center;
@@ -140,10 +149,11 @@ export default {
         font-weight: 700;
         align-items: center;
         justify-content: space-between;
-        .item-menu{
+        font-family: FZLTHJW;
+        .item-menu {
           cursor: pointer;
-          &:hover{
-            color: #FF6600;
+          &:hover {
+            color: #ff6600;
           }
         }
       }
