@@ -1,5 +1,6 @@
-@mixin flex($sp: space-between,$al: center) {
-    display: flex;
+@mixin flex($type: flex, $dir: "", $sp: space-between,$al: center) {
+    display: $type;
+    flex-direction: $dir;
     justify-content: $sp;
     align-items: $al;
 };
