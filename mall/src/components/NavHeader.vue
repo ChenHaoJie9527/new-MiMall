@@ -9,9 +9,10 @@
           <a href="javascript:;">协议规则</a>
         </div>
         <div class="topbar-user">
-          <a href="javascript:;">登录</a>
-          <a href="javascript:;">注册</a>
-          <a href="javascript:;" class="my-cart">
+          <a href="javascript:;" v-if="username">{{ username }}</a>
+          <a href="javascript:;" v-else @click.prevent="handClickToLogin">登录</a>
+          <a href="javascript:;">我的订单</a>
+          <a href="javascript:;" class="my-cart" @click.prevent="handClickToCart">
             <span class="icon-cart"></span>购物车(0)
           </a>
         </div>
@@ -25,15 +26,67 @@
         <div class="header-menu">
           <div class="item-menu">
             <span>小米手机</span>
+            <div class="children" v-if="productList">
+              <ul>
+                <li class="product" v-for="item of productList" :key="item.id">
+                  <!--target属性：打开新窗口 _black-->
+                  <a :href="'/#/product/' + item.id" target="_black">
+                    <div class="pro-imgs">
+                      <img :src="item.mainImage" :alt="item.subtitle" />
+                    </div>
+                    <div class="pro-name">{{ item.name }}</div>
+                    <div class="pro-price">{{ item.price | filtrationPrice}}</div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div v-else>当前无数据</div>
+          </div>
+          <div class="item-menu">
+            <span>Redmi红米</span>
+            <!-- <div class="children"></div> -->
+          </div>
+          <div class="item-menu">
+            <span>小米电视</span>
             <div class="children">
               <ul>
                 <li class="product">
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-1.png" alt="" />
+                      <img src="/imgs/nav-img/nav-3-1.jpg" alt="" />
                     </div>
-                    <div class="pro-name">小米CC9</div>
+                    <div class="pro-name">小米壁画电视 65英寸</div>
+                    <div class="pro-price">6999元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <!--target属性：打开新窗口 _black-->
+                  <a href="" target="_black">
+                    <div class="pro-imgs">
+                      <img src="/imgs/nav-img/nav-3-2.jpg" alt="" />
+                    </div>
+                    <div class="pro-name">小米全面屏电视E55A</div>
+                    <div class="pro-price">1999元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <!--target属性：打开新窗口 _black-->
+                  <a href="" target="_black">
+                    <div class="pro-imgs">
+                      <img src="/imgs/nav-img/nav-3-3.png" alt="" />
+                    </div>
+                    <div class="pro-name">小米电视4A 32英寸</div>
+                    <div class="pro-price">699元</div>
+                  </a>
+                </li>
+                <li class="product">
+                  <!--target属性：打开新窗口 _black-->
+                  <a href="" target="_black">
+                    <div class="pro-imgs">
+                      <img src="/imgs/nav-img/nav-3-4.jpg" alt="" />
+                    </div>
+                    <div class="pro-name">小米电视4A 55英寸</div>
                     <div class="pro-price">1799元</div>
                   </a>
                 </li>
@@ -41,62 +94,24 @@
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-2.png" alt="" />
+                      <img src="/imgs/nav-img/nav-3-5.jpg" alt="" />
                     </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799元</div>
+                    <div class="pro-name">小米电视4A 65英寸</div>
+                    <div class="pro-price">2699元</div>
                   </a>
                 </li>
                 <li class="product">
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-3.png" alt="" />
+                      <img src="/imgs/nav-img/nav-3-6.png" alt="" />
                     </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799元</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <!--target属性：打开新窗口 _black-->
-                  <a href="" target="_black">
-                    <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-4.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799元</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <!--target属性：打开新窗口 _black-->
-                  <a href="" target="_black">
-                    <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-5.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799元</div>
-                  </a>
-                </li>
-                <li class="product">
-                  <!--target属性：打开新窗口 _black-->
-                  <a href="" target="_black">
-                    <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-6.png" alt="" />
-                    </div>
-                    <div class="pro-name">小米CC9</div>
-                    <div class="pro-price">1799元</div>
+                    <div class="pro-name">查看全部</div>
+                    <div class="pro-price">查看全部</div>
                   </a>
                 </li>
               </ul>
             </div>
-          </div>
-          <div class="item-menu">
-            <span>Redmi红米</span>
-            <div class="children"></div>
-          </div>
-          <div class="item-menu">
-            <span>小电视米手机</span>
-            <div class="children"></div>
           </div>
         </div>
         <div class="header-search">
@@ -113,8 +128,37 @@
 <script>
 export default {
   name: "nav-header",
-  created() {
-    
+  data() {
+    return {
+      username: "chj",
+      productList: [],
+    };
+  },
+  filters: {
+    filtrationPrice(val){
+      if(!val) return "0.00";
+      return "￥"+ val.toFixed(2) + "元";
+    }
+  },
+  async created() {
+    this.productList = await this.getProductionList();
+  },
+  methods: {
+    handClickToLogin(){
+      this.$router.push("/login")
+    },
+    async getProductionList() {
+      const res = await this.axios.get("/products", {
+        params: {
+          categoryId: "100012",
+          pageSize: 6,
+        },
+      });
+      return res.list.length >= 6 ? res.list : undefined;
+    },
+    handClickToCart(){
+      this.$router.push("/cart")
+    }
   },
 };
 </script>
