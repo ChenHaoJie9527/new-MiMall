@@ -51,7 +51,7 @@
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-2.png" alt="" />
+                      <img src="/imgs/nav-img/nav-3.png" alt="" />
                     </div>
                     <div class="pro-name">小米CC9</div>
                     <div class="pro-price">1799元</div>
@@ -61,7 +61,7 @@
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-2.png" alt="" />
+                      <img src="/imgs/nav-img/nav-4.png" alt="" />
                     </div>
                     <div class="pro-name">小米CC9</div>
                     <div class="pro-price">1799元</div>
@@ -71,7 +71,7 @@
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-2.png" alt="" />
+                      <img src="/imgs/nav-img/nav-5.png" alt="" />
                     </div>
                     <div class="pro-name">小米CC9</div>
                     <div class="pro-price">1799元</div>
@@ -81,7 +81,7 @@
                   <!--target属性：打开新窗口 _black-->
                   <a href="" target="_black">
                     <div class="pro-imgs">
-                      <img src="/imgs/nav-img/nav-2.png" alt="" />
+                      <img src="/imgs/nav-img/nav-6.png" alt="" />
                     </div>
                     <div class="pro-name">小米CC9</div>
                     <div class="pro-price">1799元</div>
@@ -113,7 +113,9 @@
 <script>
 export default {
   name: "nav-header",
-  created() {},
+  created() {
+    
+  },
 };
 </script>
 
@@ -202,7 +204,7 @@ export default {
         font-weight: 700;
         font-family: $familyA;
         .item-menu {
-          span{
+          span {
             cursor: pointer;
           }
           &:hover {
@@ -231,25 +233,25 @@ export default {
               height: 220px;
               position: relative;
               box-sizing: border-box;
-              &:hover{
+              &:hover {
                 background: $colorE;
                 overflow: none;
               }
-              &:hover:before{
+              &:hover:before {
                 display: none;
               }
-              
-              &:before {
-                content: "";
-                position: absolute;
-                top: 28px;
-                right: 0;
-                border: 1px solid #d7d7d7;
-                height: 99px;
-              }
-              &:last-child:before{
-                display: none;
-              }
+
+              // &:before {
+              //   content: "";
+              //   position: absolute;
+              //   top: 28px;
+              //   right: 0;
+              //   border: 1px solid #d7d7d7;
+              //   height: 99px;
+              // }
+              // &:last-child:before{
+              //   display: none;
+              // }
               a {
                 box-sizing: border-box;
                 @include flex(flex, column, normal, center);
