@@ -26,9 +26,9 @@
         <div class="header-menu">
           <div class="item-menu">
             <span>小米手机</span>
-            <div class="children" v-if="productList">
+            <div class="children" v-if="phoneList">
               <ul>
-                <li class="product" v-for="item of productList" :key="item.id">
+                <li class="product" v-for="item of phoneList" :key="item.id">
                   <!--target属性：打开新窗口 _black-->
                   <a :href="'/#/product/' + item.id" target="_black">
                     <div class="pro-imgs">
@@ -132,6 +132,7 @@ export default {
     return {
       username: "chj",
       productList: [],
+      phoneList: []
     };
   },
   filters: {
@@ -141,7 +142,7 @@ export default {
     }
   },
   async created() {
-    this.productList = await this.getProductionList();
+    this.phoneList = await this.getProductionList();
   },
   methods: {
     handClickToLogin(){
@@ -154,7 +155,7 @@ export default {
           pageSize: 6,
         },
       });
-      return res.list.length >= 6 ? res.list : undefined;
+      return (res?.list?.length??0) >= 6 ? res.list.slice(0,6) : undefined;
     },
     handClickToCart(){
       this.$router.push("/cart")
