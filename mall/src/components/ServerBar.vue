@@ -4,8 +4,11 @@
       <ul>
         <li class="list">
           <span class="setting">预约维修服务</span>
+          <p></p>
           <span class="day-7">7天无理由退货</span>
+          <p></p>
           <span class="day-15">15天免费换货</span>
+          <p></p>
           <span class="email">满150元包邮</span>
         </li>
       </ul>
@@ -29,8 +32,13 @@ export default {};
   .list {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    p {
+      border-right: 1px #e5e5e5 solid;
+      height: 34px;
+    }
     span {
-      width: 25%;
+      width: 24.9%;
       text-align: center;
       display: inline-block;
       cursor: pointer;
