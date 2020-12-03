@@ -2,6 +2,42 @@
   <div class="index">
     <div class="container">
       <div class="swiper-box" v-if="slideList">
+        <div class="nav-menu">
+          <ul class="menu-warp">
+            <li class="menu-item">
+              <a href="javascript:;">手机 电话卡</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">电视盒子 电话卡</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">笔记本 平板</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">家电 插线板</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">出行 穿戴</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">耳机 音箱</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">电源 配件</a>
+              <div class="children"></div>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:;">生活 箱包</a>
+              <div class="children"></div>
+            </li>
+          </ul>
+        </div>
         <Swiper class="swiper-wrapper" :options="swiperOptions">
           <SwiperSlide v-for="item of slideList" :key="item.id">
             <a :href="'/#/product/' + item.id">
@@ -35,13 +71,11 @@ export default {
       swiperOptions: {
         loop: true,
         autoplay: true,
-        effect: "coverflow",
-        coverflowEffect: {
-          rotate: 30,
-          stretch: 10,
-          depth: 60,
-          modifier: 2,
+        effect: "cube",
+        cubeEffect: {
           slideShadows: true,
+          shadow: true,
+          shadowScale: 0.6,
         },
         mousewheel: true,
         pagination: {
@@ -88,8 +122,9 @@ export default {
 <style lang="scss" scoped>
 .index {
   .swiper-box {
+    position: relative;
     .swiper-wrapper {
-      width: 962px;
+      width: 100%;
       height: 450px;
       img {
         width: 100%;
@@ -104,6 +139,31 @@ export default {
         --swiper-navigation-size: 44px; /* 设置按钮大小 */
         outline: none;
         z-index: 15;
+      }
+    }
+    .nav-menu {
+      width: 264px;
+      height: 100%;
+      background: #55585a;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 30;
+      box-sizing: border-box;
+      padding: 26px 30px;
+      .menu-item {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        cursor: pointer;
+        &:hover{
+          background: #cccccc;
+        }
+        a {
+          color: #ffffff;
+          font-size: 16px;
+          font-family: FZLTHJW;
+        }
       }
     }
   }
