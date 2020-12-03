@@ -6,35 +6,35 @@
           <ul class="menu-warp">
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
-              <div class="children"></div>
+              <div class="children">手机</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">电视盒子 电话卡</a>
-              <div class="children"></div>
+              <div class="children">电视盒子</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">笔记本 平板</a>
-              <div class="children"></div>
+              <div class="children">笔记本</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">家电 插线板</a>
-              <div class="children"></div>
+              <div class="children">家电</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">出行 穿戴</a>
-              <div class="children"></div>
+              <div class="children">出行</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">耳机 音箱</a>
-              <div class="children"></div>
+              <div class="children">耳机</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">电源 配件</a>
-              <div class="children"></div>
+              <div class="children">电源</div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">生活 箱包</a>
-              <div class="children"></div>
+              <div class="children">生活</div>
             </li>
           </ul>
         </div>
@@ -120,6 +120,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/scss/mixin.scss";
 .index {
   .swiper-box {
     position: relative;
@@ -150,19 +151,43 @@ export default {
       top: 0;
       z-index: 30;
       box-sizing: border-box;
-      padding: 26px 30px;
+      padding: 26px 0px;
       .menu-item {
         width: 100%;
         height: 50px;
         line-height: 50px;
+        padding-left: 30px;
+        box-sizing: border-box;
         cursor: pointer;
-        &:hover{
-          background: #cccccc;
+        @include flex(flex, initial);
+        &:after {
+          @include befored("/imgs/icon-arrow.png", 10px, 15px);
+          margin-right: 28px;
+          opacity: 0.5;
+        }
+        &:hover {
+          background: #ff6600;
+          .children{
+            width: 964px;
+            height: 100%;
+            opacity: 1;
+          }
         }
         a {
           color: #ffffff;
           font-size: 16px;
           font-family: FZLTHJW;
+        }
+        .children {
+          position: absolute;
+          background: #fff;
+          top: 0;
+          left: 262px;
+          height: 0px;
+          width: 0px;
+          opacity: 0;
+          overflow: hidden;
+          transition: all 1s ease-out;
         }
       }
     }
