@@ -1,26 +1,51 @@
-@mixin flex($type: flex, $dir: "", $sp: space-between,$al: center) {
+@mixin flex($type: flex, $dir: "", $sp: space-between, $al: center) {
     display: $type;
     flex-direction: $dir;
     justify-content: $sp;
     align-items: $al;
-};
+}
+
+;
+
 @mixin hoverColor($color: #ff6600) {
-    &:hover{
+    &:hover {
         color: $color;
     }
-};
+}
+
+;
+
 @mixin hoverBgColor($bg: #999) {
-    &:hover{
+    &:hover {
         background: $bg;
     }
-};
+}
+
+;
+
 @mixin transition($target: margin, $time: 1s, $mode: ease) {
     transition: $target $time $mode;
-};
+}
+
+;
+
 @mixin bgImg($url: "", $wd: 0px, $hg: 0px, $size: contain) {
     background: url($url) no-repeat center;
     background-size: $size;
     width: $wd;
     height: $hg;
-};
+}
 
+;
+
+@mixin befored($url, $wd, $hg, $size:contain) {
+    content: " ";
+    background: url($url) no-repeat center;
+    background-size: $size;
+    width: $wd;
+    height: $hg;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
