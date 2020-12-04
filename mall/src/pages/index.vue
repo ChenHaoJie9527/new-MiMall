@@ -6,7 +6,19 @@
           <ul class="menu-warp">
             <li class="menu-item">
               <a href="javascript:;">手机 电话卡</a>
-              <div class="children">手机</div>
+              <div class="children">
+                <ul v-for="(item, k) of menuList" :key="k">
+                  <li v-for="(sub, j) of item" :key="j">
+                    <a :href="sub ? '/#/product/' + sub.id : ''">
+                      <img
+                        :src="sub ? sub.img : '/imgs/item-box-1.png'"
+                        alt=""
+                      />
+                      {{ sub.name || "小米9" }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="menu-item">
               <a href="javascript:;">电视盒子 电话卡</a>
@@ -16,6 +28,7 @@
               <a href="javascript:;">笔记本 平板</a>
               <div class="children">笔记本</div>
             </li>
+            1510754178
             <li class="menu-item">
               <a href="javascript:;">家电 插线板</a>
               <div class="children">家电</div>
@@ -109,6 +122,35 @@ export default {
           img: require("../../public/imgs/slider/slide-5.jpg"),
         },
       ],
+      menuList: [
+        [
+          {
+            id: 30,
+            img: require("../../public/imgs/item-box-1.png"),
+            name: "小米CC9",
+          },
+          {
+            id: 31,
+            img: require("../../public/imgs/item-box-2.png"),
+            name: "小米8青春版",
+          },
+          {
+            id: 32,
+            img: require("../../public/imgs/item-box-3.jpg"),
+            name: "Redmi K20 Pro",
+          },
+          {
+            id: 33,
+            img: require("../../public/imgs/item-box-4.jpg"),
+            name: "移动4G专区",
+          },
+        ],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+      ],
     };
   },
   components: {
@@ -141,11 +183,14 @@ export default {
         outline: none;
         z-index: 15;
       }
+      .swiper-button-prev {
+        left: 274px;
+      }
     }
     .nav-menu {
       width: 264px;
       height: 100%;
-      background: #55585a;
+      background: #55585a73;
       position: absolute;
       left: 0;
       top: 0;
@@ -167,9 +212,8 @@ export default {
         }
         &:hover {
           background: #ff6600;
-          .children{
+          .children {
             width: 964px;
-            height: 100%;
             opacity: 1;
           }
         }
@@ -183,11 +227,38 @@ export default {
           background: #fff;
           top: 0;
           left: 262px;
-          height: 0px;
+          height: 100%;
           width: 0px;
           opacity: 0;
+          border: 1px solid #e5e5e5;
+          box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
           overflow: hidden;
           transition: all 1s ease-out;
+          ul {
+            display: flex;
+            justify-content: space-between;
+            height: 75px;
+            li {
+              height: 75px;
+              line-height: 75px;
+              flex: 1;
+              padding-left: 23px;
+              display: flex;
+              align-items: center;
+              a {
+                color: #333;
+                font-size: 14px;
+                font-weight: bold;
+                font-family: FZLTHJW;
+                img {
+                  width: 42px;
+                  height: 35px;
+                  vertical-align: middle;
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
         }
       }
     }
