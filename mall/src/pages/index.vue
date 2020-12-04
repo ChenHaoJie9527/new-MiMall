@@ -65,9 +65,41 @@
           <!--右箭头。如果放置在swiper-container外面，需要自定义样式。-->
         </Swiper>
       </div>
-      <div class="ads-box"></div>
-      <div class="banner-box"></div>
-      <div class="product-box"></div>
+      <div class="ads-box" v-if="adsList">
+        <a
+          :href="'/#/product/' + item.id"
+          v-for="item of adsList"
+          :key="item.id"
+        >
+          <img :src="item.img" alt="" />
+        </a>
+      </div>
+      <div class="banner-box">
+        <a href="/#/product/30">
+          <img src="../../public/imgs/banner-1.png" alt="" />
+        </a>
+      </div>
+      <div class="product-box">
+        <p class="product-title">手机</p>
+        <div class="product-content">
+          <a class="content-left" href="/#/product/35">
+            <img src="../../public/imgs/mix-alpha.jpg" alt="" />
+          </a>
+          <div class="product-right">
+            <div class="product-list" v-for="(arr, i) of phoneList" :key="i">
+              <div class="phone-cart" v-for="(item, j) of arr" :key="j">
+                <p class="title">新品</p>
+                <p class="imgs">
+                  <img src="../../public/imgs/nav-img/nav-1.png" alt="" />
+                </p>
+                <p class="name">小米9 6GB+128GB</p>
+                <p class="remark">骁龙855，索尼4800万超广角微距</p>
+                <p class="price">2999元</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <server-bar></server-bar>
   </div>
@@ -90,7 +122,7 @@ export default {
           shadow: true,
           shadowScale: 0.6,
         },
-        mousewheel: true,
+        // mousewheel: true,
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -150,6 +182,28 @@ export default {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
+      ],
+      adsList: [
+        {
+          id: 33,
+          img: require("../../public/imgs/ads/ads-1.png"),
+        },
+        {
+          id: 48,
+          img: require("../../public/imgs/ads/ads-2.jpg"),
+        },
+        {
+          id: 45,
+          img: require("../../public/imgs/ads/ads-3.png"),
+        },
+        {
+          id: 47,
+          img: require("../../public/imgs/ads/ads-4.jpg"),
+        },
+      ],
+      phoneList: [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1],
       ],
     };
   },
@@ -250,6 +304,9 @@ export default {
                 font-size: 14px;
                 font-weight: bold;
                 font-family: FZLTHJW;
+                &:hover {
+                  background: #ccc;
+                }
                 img {
                   width: 42px;
                   height: 35px;
@@ -257,6 +314,126 @@ export default {
                   margin-right: 10px;
                 }
               }
+            }
+          }
+        }
+      }
+    }
+  }
+  .ads-box {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin-top: 14px;
+    margin-bottom: 31px;
+    a {
+      display: inline-block;
+      width: 296px;
+      height: 167px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .banner-box {
+    width: 100%;
+    height: 130px;
+    margin-bottom: 50px;
+    a {
+      display: inline-block;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .product-box {
+    width: 100%;
+    height: 740px;
+    background: #f5f5f5;
+    box-sizing: border-box;
+    .product-title {
+      padding-top: 30px;
+      padding-bottom: 20px;
+      color: #333333;
+      font-family: FZLTHJW;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .product-content {
+      display: flex;
+      .content-left {
+        display: inline-block;
+        width: 224px;
+        height: 619px;
+        margin-right: 16px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .product-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        .product-list {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 14px;
+          box-sizing: border-box;
+          cursor: pointer;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          .phone-cart {
+            width: 236px;
+            height: 302px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            margin-right: 14px;
+            &:hover{
+              background: #d7d7d7;
+            }
+            .title {
+              width: 67px;
+              height: 24px;
+              background: #7ecf68;
+              color: #ffffff;
+              font-family: FZLTHJW;
+              font-size: 15px;
+              font-weight: bold;
+              text-align: center;
+              line-height: 24px;
+            }
+            .imgs {
+              width: 190px;
+              height: 195px;
+              img {
+                width: 100%;
+              }
+            }
+            .name {
+              color: #333333;
+              font-size: 14px;
+              font-weight: bold;
+              font-family: FZLTHJW;
+              margin-bottom: 6px;
+            }
+            .remark {
+              font-weight: bold;
+              font-family: FZLTHJW;
+              font-size: 12px;
+              color: #999999;
+              margin-bottom: 10px;
+            }
+            .price {
+              color: #f20a0a;
+              font-weight: bold;
+              font-family: FZLTHJW;
+              font-size: 14px;
             }
           }
         }
