@@ -79,7 +79,9 @@
           <img src="../../public/imgs/banner-1.png" alt="" />
         </a>
       </div>
-      <div class="product-box">
+    </div>
+    <div class="product-box">
+      <div class="container">
         <p class="product-title">手机</p>
         <div class="product-content">
           <a class="content-left" href="/#/product/35">
@@ -87,14 +89,19 @@
           </a>
           <div class="product-right">
             <div class="product-list" v-for="(arr, i) of phoneList" :key="i">
-              <div class="phone-cart" v-for="(item, j) of arr" :key="j">
-                <p class="title">新品</p>
+              <div
+                class="phone-cart"
+                v-for="(item, j) of arr"
+                :key="j"
+                @click="handToProduct(item.id)"
+              >
+                <span class="title">新品</span>
                 <p class="imgs">
-                  <img src="../../public/imgs/nav-img/nav-1.png" alt="" />
+                  <img :src="item.mainImage" />
                 </p>
-                <p class="name">小米9 6GB+128GB</p>
-                <p class="remark">骁龙855，索尼4800万超广角微距</p>
-                <p class="price">2999元</p>
+                <p class="name">{{ item.name }}</p>
+                <p class="remark">{{ item.subtitle }}</p>
+                <p class="price">{{ item.price }}</p>
               </div>
             </div>
           </div>
@@ -201,16 +208,33 @@ export default {
           img: require("../../public/imgs/ads/ads-4.jpg"),
         },
       ],
-      phoneList: [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
-      ],
+      phoneList: [],
     };
   },
   components: {
     ServerBar,
     Swiper,
     SwiperSlide,
+  },
+  created() {
+    this.productInit();
+  },
+  methods: {
+    productInit() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: 100012,
+            pageSize: 8,
+          },
+        })
+        .then((res) => {
+          this.phoneList = [res?.list.slice(0, 4), res?.list.slice(4, 8)];
+        });
+    },
+    handToProduct(id) {
+      this.$router.push("/product/" + id);
+    },
   },
 };
 </script>
@@ -233,7 +257,7 @@ export default {
       }
       .swiper-button-prev,
       .swiper-button-next {
-        --swiper-navigation-color: $colorA; /* 单独设置按钮颜色 */
+        --swiper-navigation-color: #ff6600; /* 单独设置按钮颜色 */
         --swiper-navigation-size: 44px; /* 设置按钮大小 */
         outline: none;
         z-index: 15;
@@ -376,7 +400,7 @@ export default {
         display: flex;
         flex-direction: column;
         .product-list {
-          @include flex(flex,"",space-between,center);
+          @include flex(flex, "", space-between, center);
           margin-bottom: 14px;
           box-sizing: border-box;
           cursor: pointer;
@@ -386,22 +410,31 @@ export default {
           .phone-cart {
             width: 236px;
             height: 302px;
-            @include flex(flex,column,"",center);
+            @include flex(flex, column, "", center);
             background: $colorG;
-            margin-right: 14px;
             &:hover {
               background: $colorF;
             }
-            .title {
+            span {
+              display: inline-block;
               width: 67px;
               height: 24px;
-              background: #7ecf68;
-              color: $colorG;
-              font-family: $familyA;
-              font-size: $fontJ;
-              font-weight: bold;
               text-align: center;
               line-height: 24px;
+              &.new-pro {
+                background: #7ecf68;
+                color: $colorG;
+                font-family: $familyA;
+                font-size: $fontJ;
+                font-weight: bold;
+              }
+              &.kill-pro {
+                background: #e82626;
+                color: $colorG;
+                font-family: $familyA;
+                font-size: $fontJ;
+                font-weight: bold;
+              }
             }
             .imgs {
               width: 190px;
@@ -414,12 +447,12 @@ export default {
               color: $colorB;
               font-size: $fontJ;
               font-weight: bold;
-              font-family:  $familyA;
+              font-family: $familyA;
               margin-bottom: 6px;
             }
             .remark {
               font-weight: bold;
-              font-family:  $familyA;
+              font-family: $familyA;
               font-size: 12px;
               color: $colorD;
               margin-bottom: 10px;
@@ -429,6 +462,15 @@ export default {
               font-weight: bold;
               font-family: $familyA;
               font-size: $fontJ;
+              &:after {
+                content: "";
+                @include befored(
+                  "../../public/imgs/icon-cart-hover.png",
+                  20px,
+                  20px
+                );
+                margin-left: 6px;
+              }
             }
           }
         }
