@@ -217,6 +217,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/mixin.scss";
+@import "../assets/scss/config.scss";
 .index {
   .swiper-box {
     position: relative;
@@ -228,11 +229,11 @@ export default {
         height: 100%;
       }
       .swiper-pagination {
-        --swiper-theme-color: #ff6600; /*设置小圆点颜色 */
+        --swiper-theme-color: $colorA; /*设置小圆点颜色 */
       }
       .swiper-button-prev,
       .swiper-button-next {
-        --swiper-navigation-color: #ff6600; /* 单独设置按钮颜色 */
+        --swiper-navigation-color: $colorA; /* 单独设置按钮颜色 */
         --swiper-navigation-size: 44px; /* 设置按钮大小 */
         outline: none;
         z-index: 15;
@@ -321,9 +322,7 @@ export default {
     }
   }
   .ads-box {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+    @include flex(flex, "", space-between, center);
     margin-top: 14px;
     margin-bottom: 31px;
     a {
@@ -350,14 +349,14 @@ export default {
   .product-box {
     width: 100%;
     height: 740px;
-    background: #f5f5f5;
+    background: $colorJ;
     box-sizing: border-box;
     .product-title {
       padding-top: 30px;
       padding-bottom: 20px;
-      color: #333333;
-      font-family: FZLTHJW;
-      font-size: 22px;
+      color: $colorB;
+      font-family: $familyA;
+      font-size: $fontF;
       font-weight: bold;
     }
     .product-content {
@@ -377,9 +376,7 @@ export default {
         display: flex;
         flex-direction: column;
         .product-list {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+          @include flex(flex,"",space-between,center);
           margin-bottom: 14px;
           box-sizing: border-box;
           cursor: pointer;
@@ -389,21 +386,19 @@ export default {
           .phone-cart {
             width: 236px;
             height: 302px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #fff;
+            @include flex(flex,column,"",center);
+            background: $colorG;
             margin-right: 14px;
-            &:hover{
-              background: #d7d7d7;
+            &:hover {
+              background: $colorF;
             }
             .title {
               width: 67px;
               height: 24px;
               background: #7ecf68;
-              color: #ffffff;
-              font-family: FZLTHJW;
-              font-size: 15px;
+              color: $colorG;
+              font-family: $familyA;
+              font-size: $fontJ;
               font-weight: bold;
               text-align: center;
               line-height: 24px;
@@ -416,24 +411,24 @@ export default {
               }
             }
             .name {
-              color: #333333;
-              font-size: 14px;
+              color: $colorB;
+              font-size: $fontJ;
               font-weight: bold;
-              font-family: FZLTHJW;
+              font-family:  $familyA;
               margin-bottom: 6px;
             }
             .remark {
               font-weight: bold;
-              font-family: FZLTHJW;
+              font-family:  $familyA;
               font-size: 12px;
-              color: #999999;
+              color: $colorD;
               margin-bottom: 10px;
             }
             .price {
               color: #f20a0a;
               font-weight: bold;
-              font-family: FZLTHJW;
-              font-size: 14px;
+              font-family: $familyA;
+              font-size: $fontJ;
             }
           }
         }
