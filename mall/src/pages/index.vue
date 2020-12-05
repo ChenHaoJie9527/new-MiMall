@@ -28,7 +28,6 @@
               <a href="javascript:;">笔记本 平板</a>
               <div class="children">笔记本</div>
             </li>
-            1510754178
             <li class="menu-item">
               <a href="javascript:;">家电 插线板</a>
               <div class="children">家电</div>
@@ -79,7 +78,9 @@
           <img src="../../public/imgs/banner-1.png" alt="" />
         </a>
       </div>
-      <div class="product-box">
+    </div>
+    <div class="product-box">
+      <div class="container">
         <p class="product-title">手机</p>
         <div class="product-content">
           <a class="content-left" href="/#/product/35">
@@ -87,14 +88,21 @@
           </a>
           <div class="product-right">
             <div class="product-list" v-for="(arr, i) of phoneList" :key="i">
-              <div class="phone-cart" v-for="(item, j) of arr" :key="j">
-                <p class="title">新品</p>
-                <p class="imgs">
-                  <img src="../../public/imgs/nav-img/nav-1.png" alt="" />
+              <div
+                class="phone-cart"
+                v-for="(item, j) of arr"
+                :key="j"
+                @click="handClickToProduct(item.id)"
+              >
+                <p class="title" :class="j % 2 == 0 ? 'new-pro' : 'kill-pro'">
+                  {{ j % 2 == 0 ? "新品" : "秒杀" }}
                 </p>
-                <p class="name">小米9 6GB+128GB</p>
-                <p class="remark">骁龙855，索尼4800万超广角微距</p>
-                <p class="price">2999元</p>
+                <p class="imgs">
+                  <img :src="item.mainImage" alt="" />
+                </p>
+                <p class="name">{{ item.name }}</p>
+                <p class="remark">{{ item.subtitle }}</p>
+                <p class="price">{{ item.price | setPrice }}</p>
               </div>
             </div>
           </div>
@@ -202,8 +210,8 @@ export default {
         },
       ],
       phoneList: [
-        [1, 1, 1, 1],
-        [1, 1, 1, 1],
+        // [1, 1, 1, 1],
+        // [1, 1, 1, 1],
       ],
     };
   },
@@ -211,6 +219,35 @@ export default {
     ServerBar,
     Swiper,
     SwiperSlide,
+  },
+  filters: {
+    setPrice(val) {
+      if (!val) return "0.00";
+      return "￥" + val.toFixed(2) + "元";
+    },
+  },
+  created() {
+    this.phoneInit();
+  },
+  methods: {
+    phoneInit() {
+      this.axios
+        .get("/products", {
+          params: {
+            categoryId: 100012,
+            pageSize: 8,
+          },
+        })
+        .then((res) => {
+          this.phoneList = [
+            res?.list.slice(0, 4) ?? [1, 1, 1, 1],
+            res?.list.slice(4, 8) ?? [1, 1, 1, 1],
+          ];
+        });
+    },
+    handClickToProduct(id) {
+      this.$router.push("/product/" + id);
+    },
   },
 };
 </script>
@@ -229,11 +266,11 @@ export default {
         height: 100%;
       }
       .swiper-pagination {
-        --swiper-theme-color: $colorA; /*设置小圆点颜色 */
+        --swiper-theme-color: #ff6600; /*设置小圆点颜色 */
       }
       .swiper-button-prev,
       .swiper-button-next {
-        --swiper-navigation-color: $colorA; /* 单独设置按钮颜色 */
+        --swiper-navigation-color: #ff6600; /* 单独设置按钮颜色 */
         --swiper-navigation-size: 44px; /* 设置按钮大小 */
         outline: none;
         z-index: 15;
@@ -376,7 +413,7 @@ export default {
         display: flex;
         flex-direction: column;
         .product-list {
-          @include flex(flex,"",space-between,center);
+          @include flex(flex, "", space-between, center);
           margin-bottom: 14px;
           box-sizing: border-box;
           cursor: pointer;
@@ -386,40 +423,51 @@ export default {
           .phone-cart {
             width: 236px;
             height: 302px;
-            @include flex(flex,column,"",center);
+            @include flex(flex, column, "", center);
             background: $colorG;
-            margin-right: 14px;
             &:hover {
               background: $colorF;
             }
             .title {
               width: 67px;
               height: 24px;
-              background: #7ecf68;
-              color: $colorG;
-              font-family: $familyA;
-              font-size: $fontJ;
-              font-weight: bold;
               text-align: center;
               line-height: 24px;
+              margin-bottom: 20px;
+              &.new-pro {
+                background: #7ecf68;
+                color: $colorG;
+                font-family: $familyA;
+                font-size: $fontJ;
+                font-weight: bold;
+              }
+              &.kill-pro {
+                background: #e82626;
+                color: $colorG;
+                font-family: $familyA;
+                font-size: $fontJ;
+                font-weight: bold;
+              }
             }
             .imgs {
               width: 190px;
-              height: 195px;
+              height: 150px;
+              margin-bottom: 10px;
               img {
                 width: 100%;
+                height: 100%;
               }
             }
             .name {
               color: $colorB;
               font-size: $fontJ;
               font-weight: bold;
-              font-family:  $familyA;
+              font-family: $familyA;
               margin-bottom: 6px;
             }
             .remark {
               font-weight: bold;
-              font-family:  $familyA;
+              font-family: $familyA;
               font-size: 12px;
               color: $colorD;
               margin-bottom: 10px;
