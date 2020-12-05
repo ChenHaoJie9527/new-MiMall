@@ -271,7 +271,7 @@ export default {
             border-top: 1px $colorH solid;
             box-shadow: 0px 7px 6px 0px rgba(0, 0, 0, 0.11);
             clear: left;
-            z-index: 10;
+            z-index: 90;
             transition: all 1s ease;
             .product {
               float: left;
