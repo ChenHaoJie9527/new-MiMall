@@ -1,7 +1,7 @@
 <template>
   <div>
     <order-header></order-header>
-      <input type="text" v-model="inputValue" v-layz:input="inputValue" @input="handClickInput">
+      <input type="text" v-model="inputValue" v-debounce:input="inputValue" @input="handClickInput">
     <order-footer></order-footer>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     }
   },
   directives:{
-    layz: {
+    debounce: {
       update: function(binding){
         // console.log(binding.value)
         debounceAjax(binding.value)
