@@ -10,6 +10,7 @@ export const debounce = (fn, delay = 1000) => {
     let timer;
     return (data) => {
         clearTimeout(timer);
+        if(data == "") return clearTimeout(timer);
         timer= setTimeout(() => {
             fn.call(this, data)
         }, delay)
