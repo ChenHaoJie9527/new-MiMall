@@ -7,12 +7,25 @@
         v-model="inputValue"
         v-bounce:input="inputValue"
         name="bounce"
+        @click="previewIsShow"
       />
     </div>
-    <div class="throttle">
-      <input type="text" v-model="inputMove" v-throttle:move="inputMove" name="throttle"/>
+    <ul v-show="isshow">
+      <li v-for="(item, index) of list" :key="index">
+        <p class="name">{{ item.name }}</p>
+        <p class="age">{{ item.age }}</p>
+        <p class="job">{{ item.job }}</p>
+        <p class="hobby">{{ item.hobby }}</p>
+      </li>
+    </ul>
+    <div class="throttle" v-if="false">
+      <input
+        type="text"
+        v-model="inputMove"
+        v-throttle:move="inputMove"
+        name="throttle"
+      />
     </div>
-
     <order-footer></order-footer>
   </div>
 </template>
@@ -22,6 +35,7 @@ import OrderHeader from "../components/OrderFooter";
 import OrderFooter from "../components/OrderFooter";
 import { debounceAjax } from "../utils/debounce";
 import { throttleMove } from "../utils/throttle";
+import {SearchKeyValue} from "../utils/searchKeyValue";
 export default {
   name: "cart",
   components: {
@@ -33,6 +47,14 @@ export default {
       inputValue: "",
       flag: true,
       inputMove: "",
+      list: [
+        { name: "April", job: "programmer", age: "18", hobby: "study" },
+        { name: "Shawn", job: "student", age: "8", hobby: "study" },
+        { name: "Leo", job: "teacher", age: "28", hobby: "play" },
+        { name: "Todd", job: "programmer", age: "19", hobby: "sleep" },
+        { name: "Scoot", job: "cook", age: "38", hobby: "paintting" },
+      ],
+      isshow: false,
     };
   },
   directives: {
@@ -47,7 +69,14 @@ export default {
       },
     },
   },
+  created() {
+    const res = SearchKeyValue(this.list,"job","cook");
+    console.log(res)
+  },
   methods: {
+    previewIsShow() {
+      this.isshow = !this.isshow;
+    },
   },
 };
 </script>
