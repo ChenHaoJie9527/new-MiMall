@@ -35,7 +35,7 @@ import OrderHeader from "../components/OrderFooter";
 import OrderFooter from "../components/OrderFooter";
 import { debounceAjax } from "../utils/debounce";
 import { throttleMove } from "../utils/throttle";
-import {SearchKeyValue} from "../utils/searchKeyValue";
+import { SearchKeyValue, SearchMultiValue } from "../utils/searchKeyValue";
 export default {
   name: "cart",
   components: {
@@ -70,8 +70,17 @@ export default {
     },
   },
   created() {
-    const res = SearchKeyValue(this.list,"job","cook");
-    console.log(res)
+    //单条件精准查询
+    const res = SearchKeyValue(this.list, "job", "cook");
+    console.log(res);
+    const filters = {
+      name: "Leo",
+      age: "19",
+    };
+    // 多条件精准查询
+    const res1 = SearchMultiValue(this.list, filters);
+    console.log(res1)
+    
   },
   methods: {
     previewIsShow() {
