@@ -35,7 +35,7 @@ import OrderHeader from "../components/OrderFooter";
 import OrderFooter from "../components/OrderFooter";
 import { debounceAjax } from "../utils/debounce";
 import { throttleMove } from "../utils/throttle";
-import { SearchKeyValue, SearchMultiValue } from "../utils/searchKeyValue";
+import { SearchKeyValue, SearchMultiValue,SearchSingleAndMultiValue } from "../utils/searchKeyValue";
 export default {
   name: "cart",
   components: {
@@ -80,7 +80,10 @@ export default {
     // 多条件精准查询
     const res1 = SearchMultiValue(this.list, filters);
     console.log(res1)
-    
+    //单条件多值精准查找
+    const res2 = SearchSingleAndMultiValue(this.list,"name",["Leo","Shawn"]);
+    console.log(res2)
+
   },
   methods: {
     previewIsShow() {
