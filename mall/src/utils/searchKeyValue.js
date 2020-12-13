@@ -1,5 +1,5 @@
 /**
- * 
+ * @param {Array} list 所有数据
  * @param {string 查询数组中的数据} key 
  * @param {string 对应的值} value 
  * @param {Function 单个精准查询} SearchKeyValue
@@ -28,9 +28,30 @@ export function SearchMultiValue(list = [], filterList = {}) {
 /**
  * 
  * @param {Array} list 所有数据 
- * @param {*} key 需要查询的key键
- * @param {*} valueArr 需要查询的值 单个或者多个
+ * @param {String} key 需要查询的key键
+ * @param {Array} valueArr 需要查询的值 单个或者多个
+ * @param {Function} SearchSingleAndMultiValue 单条件多值精准查找
  */
 export function SearchSingleAndMultiValue(list = [], key = "", valueArr = []) {
     return list.filter(item => valueArr.find(i => i == item[key]))
+}
+
+/**
+ * 
+ * @param {Array} list 所有数据
+ * @param {Object} filters 需要查询的多项数据
+ * @param {Function} SearchMultiKeyAndMultiValue 多条件多值精准查找
+ */
+export function SearchMultiKeyAndMultiValue(list = [], filters = {}) {
+    let resArr = [];
+    list.filter(item => {
+        for (const i in filters) {
+            for (const j of filters[i]) {
+                if(item[i] == j){
+                   return resArr.push(item)
+                }
+            }
+        }
+    })
+    return resArr;
 }
