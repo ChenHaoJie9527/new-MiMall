@@ -5,27 +5,21 @@
       <input
         type="text"
         v-model="inputValue"
-        v-bounce:input="inputValue"
+        v-bounce:inputValue="onDebounceInput"
+        ref="input"
         name="bounce"
         @click="previewIsShow"
+        data-value
       />
     </div>
     <ul v-show="isshow">
-      <li v-for="(item, index) of staff" :key="index">
+      <li v-for="(item, index) of staff" :key="index" class="list">
         <p class="name">{{ item.name }}</p>
         <p class="age">{{ item.age }}</p>
         <p class="job">{{ item.job }}</p>
         <p class="hobby">{{ item.hobby }}</p>
       </li>
     </ul>
-    <div class="throttle" v-if="false">
-      <input
-        type="text"
-        v-model="inputMove"
-        v-throttle:move="inputMove"
-        name="throttle"
-      />
-    </div>
     <order-footer></order-footer>
   </div>
 </template>
@@ -33,14 +27,6 @@
 <script>
 import OrderHeader from "../components/OrderFooter";
 import OrderFooter from "../components/OrderFooter";
-import { debounceAjax } from "../utils/debounce";
-import { throttleMove } from "../utils/throttle";
-import {
-  SearchKeyValue,
-  SearchMultiValue,
-  SearchSingleAndMultiValue,
-  SearchMultiKeyAndMultiValue,
-} from "../utils/searchKeyValue";
 export default {
   name: "cart",
   components: {
@@ -53,61 +39,59 @@ export default {
       flag: true,
       inputMove: "",
       staff: [
-        { name: "April", job: "programmer", age: "18", hobby: "study" },
-        { name: "Shawn", job: "student", age: "8", hobby: "study" },
-        { name: "Leo", job: "teacher", age: "28", hobby: "play" },
-        { name: "Todd", job: "programmer", age: "19", hobby: "sleep" },
-        { name: "Scoot", job: "cook", age: "38", hobby: "paintting" },
+        { name: "清远", job: "programmer", age: "18", hobby: "study" },
+        { name: "惠州", job: "student", age: "8", hobby: "study" },
+        { name: "肇庆", job: "teacher", age: "28", hobby: "play" },
+        { name: "阳江", job: "programmer", age: "19", hobby: "sleep" },
+        { name: "广州", job: "cook", age: "38", hobby: "paintting" },
+        { name: "湛江", job: "cook", age: "38", hobby: "paintting" },
+        { name: "昆明", job: "cook", age: "38", hobby: "paintting" },
+        { name: "茂名", job: "cook", age: "38", hobby: "paintting" },
+        { name: "云浮", job: "cook", age: "38", hobby: "paintting" },
+        { name: "汕头", job: "cook", age: "38", hobby: "paintting" },
       ],
       isshow: false,
     };
   },
   directives: {
     bounce: {
-      update: function (binding) {
-        debounceAjax(binding.value);
-      },
-    },
-    throttle: {
-      update: function (binding) {
-        throttleMove(binding.value);
+      inserted: function (el, binding) {
+        let timer;
+        el.addEventListener("input", (e) => {
+          e.target.dataset.value = el.value;
+          if (timer) {
+            clearTimeout(timer);
+          }
+          timer = setTimeout(() => {
+            binding.value();
+          }, 1000);
+        });
       },
     },
   },
-  created() {
-    //单条件精准查询 // 函数执行 在 “staff” 对象中查找 “job” 值为 “programmer” 的数据
-    const res = SearchKeyValue(this.staff, "job", "cook");
-    console.log(res);
-    const filters = {
-      name: "Leo",
-      age: "19",
-    };
-    // 多条件精准查询 函数执行 在 “staff” 对象中查找 “name” 值为 “April” 和 “hobby” 值为 “study” 的数据
-    const res1 = SearchMultiValue(this.staff, filters);
-    console.log(res1);
-    //单条件多值精准查找 // 函数执行 在 “staff” 对象中查找 “job” 值为 “programmer” 和 “student” 的数据
-    const res2 = SearchSingleAndMultiValue(this.staff, "name", [
-      "programmer",
-      "student",
-    ]);
-    console.log(res2);
-    // 函数执行 在 “staff” 对象中查找 “age” 值为 “8”或“18” 和 “hobby” 值为 “play”或“sleep” 的数据
-    const filters1 = {
-      age: [8, 18],
-      hobby: ["play", "sleep"],
-    };
-    const res3 = SearchMultiKeyAndMultiValue(this.staff, filters1);
-    console.log(res3);
-  },
+  created() {},
   methods: {
     previewIsShow() {
       this.isshow = !this.isshow;
+    },
+    onDebounceInput() {
+      const val = this.$refs.input.dataset.value;
+      if (val) {
+        const res = this.staff.filter((item) => {
+          for (const key in item) {
+            if (item[key].includes(val)) {
+              return item;
+            }
+          }
+        });
+       return this.staff = res;
+      }
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss">
 #div1 {
   height: 200px;
   background-color: orange;
