@@ -20,6 +20,15 @@
         <p class="hobby">{{ item.hobby }}</p>
       </li>
     </ul>
+    <div class="form">
+      <div class="name">
+        <input type="text" placeholder="请输入姓名" v-model="nameValue" />
+      </div>
+      <div class="age">
+        <input type="text" placeholder="请输入年龄" v-model="ageValue" />
+      </div>
+      <button @click.prevent="onSubmit">提交</button>
+    </div>
     <order-footer></order-footer>
   </div>
 </template>
@@ -27,6 +36,36 @@
 <script>
 import OrderHeader from "../components/OrderFooter";
 import OrderFooter from "../components/OrderFooter";
+import Schema from "async-validator";
+const descriptor = {
+  name: {
+    type: "string",
+    required: true,
+    asyncValidator: (rule, value) => {
+      return new Promise((resolve, reject) => {
+        if (value !== "chj") {
+          reject("姓名不存在");
+        } else {
+          resolve();
+        }
+      });
+    },
+  },
+  age: {
+    type: "number",
+    required: true,
+    asyncValidator: (rule, value) => {
+      return new Promise((resolve, reject) => {
+        if (value < 18) {
+          reject("年龄小于18");
+        } else {
+          resolve();
+        }
+      });
+    },
+  },
+};
+const validator = new Schema(descriptor);
 export default {
   name: "cart",
   components: {
@@ -51,9 +90,13 @@ export default {
         { name: "汕头", job: "cook", age: "38", hobby: "paintting" },
       ],
       isshow: false,
+      arr: [1, 5, 6, 1, 9, 9, 9, 9, 9, 2, 1],
+      nameValue: "",
+      ageValue: "",
     };
   },
   directives: {
+    // 防抖指令
     bounce: {
       inserted: function (el, binding) {
         let timer;
@@ -67,6 +110,10 @@ export default {
           }, 1000);
         });
       },
+    },
+    // 去重指令
+    deweight: {
+      inserted: () => {},
     },
   },
   created() {},
@@ -84,8 +131,33 @@ export default {
             }
           }
         });
-       return this.staff = res;
+        return (this.staff = res);
       }
+    },
+    onSubmit() {
+      // 回调函数用法
+      // validator.validate({ name: "chj1", age: 16 }, (err, fields) => {
+      //   if (err) {
+      //     // 校验失败，errors是一个包含所有error的数组。
+      //     // fields是一个对象，对象中field（字段）是key，每个field对应的所有error组成的数组是value。
+      //     return this.handleErrors(err, fields);
+      //   }
+      //   // 校验通过
+      // });
+
+      //promise用法 bug: 回调后catch error是undefined
+      validator
+        .validate({ name: "muji", age: 16 })
+        .then(() => {
+          // 校验通过或者没有error message
+        })
+        .catch(({ error, fields }) => {
+          this.handleErrors(error, fields);
+        });
+    },
+    handleErrors(error, fields) {
+      const { age, name } = fields;
+      console.log(age, name);
     },
   },
 };
