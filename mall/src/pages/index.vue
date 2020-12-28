@@ -10,10 +10,7 @@
                 <ul v-for="(item, k) of menuList" :key="k">
                   <li v-for="(sub, j) of item" :key="j">
                     <a :href="sub ? '/#/product/' + sub.id : ''">
-                      <img
-                        :src="sub ? sub.img : '/imgs/item-box-1.png'"
-                        alt=""
-                      />
+                      <img :src="sub ? sub.img : '/imgs/item-box-1.png'" alt />
                       {{ sub.name || "小米9" }}
                     </a>
                   </li>
@@ -53,7 +50,7 @@
         <Swiper class="swiper-wrapper" :options="swiperOptions">
           <SwiperSlide v-for="item of slideList" :key="item.id">
             <a :href="'/#/product/' + item.id">
-              <img :src="item.img" alt="" />
+              <img :src="item.img" alt />
             </a>
           </SwiperSlide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -65,17 +62,13 @@
         </Swiper>
       </div>
       <div class="ads-box" v-if="adsList">
-        <a
-          :href="'/#/product/' + item.id"
-          v-for="item of adsList"
-          :key="item.id"
-        >
-          <img :src="item.img" alt="" />
+        <a :href="'/#/product/' + item.id" v-for="item of adsList" :key="item.id">
+          <img :src="item.img" alt />
         </a>
       </div>
       <div class="banner-box">
         <a href="/#/product/30">
-          <img src="../../public/imgs/banner-1.png" alt="" />
+          <img src="../../public/imgs/banner-1.png" alt />
         </a>
       </div>
     </div>
@@ -84,7 +77,7 @@
         <p class="product-title">手机</p>
         <div class="product-content">
           <a class="content-left" href="/#/product/35">
-            <img src="../../public/imgs/mix-alpha.jpg" alt="" />
+            <img src="../../public/imgs/mix-alpha.jpg" alt />
           </a>
           <div class="product-right">
             <div class="product-list" v-for="(arr, i) of phoneList" :key="i">
@@ -94,137 +87,146 @@
                 :key="j"
                 @click="handClickToProduct(item.id)"
               >
-                <p class="title" :class="j % 2 == 0 ? 'new-pro' : 'kill-pro'">
-                  {{ j % 2 == 0 ? "新品" : "秒杀" }}
-                </p>
+                <p
+                  class="title"
+                  :class="j % 2 == 0 ? 'new-pro' : 'kill-pro'"
+                >{{ j % 2 == 0 ? "新品" : "秒杀" }}</p>
                 <p class="imgs">
-                  <img :src="item.mainImage" alt="" />
+                  <img :src="item.mainImage" alt />
                 </p>
                 <p class="name">{{ item.name }}</p>
                 <p class="remark">{{ item.subtitle }}</p>
-                <p class="price">{{ item.price | setPrice }}</p>
+                <p class="price" @click.stop="addCart(item.id)">{{ item.price | setPrice }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <Model title="友情提示" confrgText="确定" btnType="1" modelType="middle" :showModel.sync="isShow" @submit="goToCart" @caslce="isShow = false">
+      <template #body>
+        <p>商品添加成功</p>
+      </template>
+    </Model>
     <server-bar></server-bar>
   </div>
 </template>
 
 <script>
-import ServerBar from "../components/ServerBar.vue";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
+import ServerBar from '../components/ServerBar.vue'
+import Model from '../components/Model'
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
 export default {
-  name: "index",
+  name: 'index',
   data() {
     return {
       swiperOptions: {
         loop: true,
         autoplay: true,
-        effect: "cube",
+        effect: 'cube',
         cubeEffect: {
           slideShadows: true,
           shadow: true,
-          shadowScale: 0.6,
+          shadowScale: 0.6
         },
         // mousewheel: true,
         pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
+          el: '.swiper-pagination',
+          clickable: true
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       },
       slideList: [
         {
           id: 42,
-          img: require("../../public/imgs/slider/slide-1.jpg"),
+          img: require('../../public/imgs/slider/slide-1.jpg')
         },
         {
           id: 45,
-          img: require("../../public/imgs/slider/slide-2.jpg"),
+          img: require('../../public/imgs/slider/slide-2.jpg')
         },
         {
           id: 46,
-          img: require("../../public/imgs/slider/slide-3.jpg"),
+          img: require('../../public/imgs/slider/slide-3.jpg')
         },
         {
-          id: "1",
-          img: require("../../public/imgs/slider/slide-4.jpg"),
+          id: '1',
+          img: require('../../public/imgs/slider/slide-4.jpg')
         },
         {
-          id: "2",
-          img: require("../../public/imgs/slider/slide-5.jpg"),
-        },
+          id: '2',
+          img: require('../../public/imgs/slider/slide-5.jpg')
+        }
       ],
       menuList: [
         [
           {
             id: 30,
-            img: require("../../public/imgs/item-box-1.png"),
-            name: "小米CC9",
+            img: require('../../public/imgs/item-box-1.png'),
+            name: '小米CC9'
           },
           {
             id: 31,
-            img: require("../../public/imgs/item-box-2.png"),
-            name: "小米8青春版",
+            img: require('../../public/imgs/item-box-2.png'),
+            name: '小米8青春版'
           },
           {
             id: 32,
-            img: require("../../public/imgs/item-box-3.jpg"),
-            name: "Redmi K20 Pro",
+            img: require('../../public/imgs/item-box-3.jpg'),
+            name: 'Redmi K20 Pro'
           },
           {
             id: 33,
-            img: require("../../public/imgs/item-box-4.jpg"),
-            name: "移动4G专区",
-          },
+            img: require('../../public/imgs/item-box-4.jpg'),
+            name: '移动4G专区'
+          }
         ],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-        [0, 0, 0, 0],
+        [0, 0, 0, 0]
       ],
       adsList: [
         {
           id: 33,
-          img: require("../../public/imgs/ads/ads-1.png"),
+          img: require('../../public/imgs/ads/ads-1.png')
         },
         {
           id: 48,
-          img: require("../../public/imgs/ads/ads-2.jpg"),
+          img: require('../../public/imgs/ads/ads-2.jpg')
         },
         {
           id: 45,
-          img: require("../../public/imgs/ads/ads-3.png"),
+          img: require('../../public/imgs/ads/ads-3.png')
         },
         {
           id: 47,
-          img: require("../../public/imgs/ads/ads-4.jpg"),
-        },
+          img: require('../../public/imgs/ads/ads-4.jpg')
+        }
       ],
       phoneList: [
         // [1, 1, 1, 1],
         // [1, 1, 1, 1],
       ],
-    };
+      isShow: false
+    }
   },
   components: {
     ServerBar,
     Swiper,
     SwiperSlide,
+    Model
   },
   filters: {
     setPrice(val) {
-      if (!val) return "0.00";
-      return "￥" + val.toFixed(2) + "元";
-    },
+      if (!val) return '0.00'
+      return '￥' + val.toFixed(2) + '元'
+    }
   },
   created() {
     this.phoneInit();
@@ -232,29 +234,46 @@ export default {
   methods: {
     phoneInit() {
       this.axios
-        .get("/products", {
+        .get('/products', {
           params: {
             categoryId: 100012,
-            pageSize: 8,
-          },
+            pageSize: 14
+          }
         })
-        .then((res) => {
+        .then(res => {
+          res.list = res?.list?.slice(6, 14);
           this.phoneList = [
             res?.list.slice(0, 4) ?? [1, 1, 1, 1],
-            res?.list.slice(4, 8) ?? [1, 1, 1, 1],
-          ];
-        });
+            res?.list.slice(4, 8) ?? [1, 1, 1, 1]
+          ]
+        })
     },
     handClickToProduct(id) {
-      this.$router.push("/product/" + id);
+      this.$router.push('/product/' + id);
     },
-  },
-};
+    addCart() {
+      return this.isShow = true;
+      // this.axios
+      //   .post('/carts', {
+      //     productId: id,
+      //     selected: true
+      //   })
+      //   .then(() => {})
+      //   .catch(() => {})
+      //   .finally(() => {
+      //     this.isShow = true;
+      //   })
+    },
+    goToCart(){
+      
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/mixin.scss";
-@import "../assets/scss/config.scss";
+@import '../assets/scss/mixin.scss';
+@import '../assets/scss/config.scss';
 .index {
   .swiper-box {
     position: relative;
@@ -298,7 +317,7 @@ export default {
         cursor: pointer;
         @include flex(flex, initial);
         &:after {
-          @include befored("/imgs/icon-arrow.png", 10px, 15px);
+          @include befored('/imgs/icon-arrow.png', 10px, 15px);
           margin-right: 28px;
           opacity: 0.5;
         }
@@ -359,7 +378,7 @@ export default {
     }
   }
   .ads-box {
-    @include flex(flex, "", space-between, center);
+    @include flex(flex, '', space-between, center);
     margin-top: 14px;
     margin-bottom: 31px;
     a {
@@ -413,7 +432,7 @@ export default {
         display: flex;
         flex-direction: column;
         .product-list {
-          @include flex(flex, "", space-between, center);
+          @include flex(flex, '', space-between, center);
           margin-bottom: 14px;
           box-sizing: border-box;
           cursor: pointer;
@@ -423,7 +442,7 @@ export default {
           .phone-cart {
             width: 236px;
             height: 302px;
-            @include flex(flex, column, "", center);
+            @include flex(flex, column, '', center);
             background: $colorG;
             &:hover {
               background: $colorF;
@@ -477,6 +496,10 @@ export default {
               font-weight: bold;
               font-family: $familyA;
               font-size: $fontJ;
+              &:after {
+                @include befored('/imgs/icon-cart-hover.png', 20px, 20px);
+                margin-left: 4px;
+              }
             }
           }
         }

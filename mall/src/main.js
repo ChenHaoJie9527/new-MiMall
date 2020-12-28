@@ -20,12 +20,6 @@ axios.interceptors.response.use((response) => {
     alert(res.msg);
   }
 })
-
-
-
-
-
-
 Vue.use(VueAxios, axios);
 new Vue({
   router,

@@ -1,51 +1,59 @@
 @mixin flex($type: flex, $dir: "", $sp: space-between, $al: center) {
-    display: $type;
-    flex-direction: $dir;
-    justify-content: $sp;
-    align-items: $al;
+  display: $type;
+  flex-direction: $dir;
+  justify-content: $sp;
+  align-items: $al;
 }
-
-;
 
 @mixin hoverColor($color: #ff6600) {
-    &:hover {
-        color: $color;
-    }
+  &:hover {
+    color: $color;
+  }
 }
-
-;
 
 @mixin hoverBgColor($bg: #999) {
-    &:hover {
-        background: $bg;
-    }
+  &:hover {
+    background: $bg;
+  }
 }
-
-;
 
 @mixin transition($target: margin, $time: 1s, $mode: ease) {
-    transition: $target $time $mode;
+  transition: $target $time $mode;
 }
-
-;
 
 @mixin bgImg($url: "", $wd: 0px, $hg: 0px, $size: contain) {
-    background: url($url) no-repeat center;
-    background-size: $size;
-    width: $wd;
-    height: $hg;
+  background: url($url) no-repeat center;
+  background-size: $size;
+  width: $wd;
+  height: $hg;
 }
 
-;
+@mixin befored($url, $wd, $hg, $size: contain) {
+  content: " ";
+  background: url($url) no-repeat center;
+  background-size: $size;
+  width: $wd;
+  height: $hg;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
 
-@mixin befored($url, $wd, $hg, $size:contain) {
-    content: " ";
-    background: url($url) no-repeat center;
-    background-size: $size;
-    width: $wd;
-    height: $hg;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 4px;
-    margin-bottom: 4px;
+@mixin position($pos: absolute, $top: 0, $left: 0, $w: 100%, $h: 100%) {
+  position: $pos;
+  top: $top;
+  left: $left;
+  width: $w;
+  height: $h;
+}
+@mixin iconClose($pos: absolute,$top: 0, $right: '', $w: 0, $h: 0, $img: '') {
+    position: $pos;
+    width: $w;
+    height: $h;
+    top: $top;
+    right: $right;
+    background: url($img) no-repeat center;
+    background-size: contain;
+
 }
