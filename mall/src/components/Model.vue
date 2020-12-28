@@ -4,18 +4,18 @@
       <div class="mask"></div>
       <div class="model-dialog">
         <div class="model-header">
-          <span>标题</span>
+          <span>{{title}}</span>
           <a href="javascript:;" class="icon-close" @click.prevent="$emit('update:showModel',false)"></a>
         </div>
         <div class="model-body">
           <slot name="body"></slot>
         </div>
         <div class="model-footer">
-            <a v-if="btnType == 1" class="btn" @click="$emit('submit')">确定</a>
-            <a v-if="btnType == 2" class="btn" @click="$emit('caslce')">取消</a>
+            <a v-if="btnType == 1" class="btn" @click="$emit('submit')">{{confrmText}}</a>
+            <a v-if="btnType == 2" class="btn" @click="$emit('caslce')">{{closeTest}}</a>
           <div v-if="btnType == 3" class="btn-group">
-            <a class="btn" @click="$emit('submit')">确定</a>
-            <a class="btn" @click="$emit('caslce')">取消</a>
+            <a class="btn" @click="$emit('submit')">{{confrmText}}</a>
+            <a class="btn" @click="$emit('caslce')">{{closeTest}}</a>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default {
       type: String,
       default: '1'
     },
-    confrgText: {
+    confrmText: {
       type: String,
       default: '确定'
     },

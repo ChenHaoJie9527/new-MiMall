@@ -103,7 +103,7 @@
         </div>
       </div>
     </div>
-    <Model title="友情提示" confrgText="确定" btnType="1" modelType="middle" :showModel.sync="isShow" @submit="goToCart" @caslce="isShow = false">
+    <Model title="友情提示" confrmText="查看购物车"  btnType="1" modelType="middle" :showModel.sync="isShow" @submit="goToCart" @caslce="isShow = false">
       <template #body>
         <p>商品添加成功</p>
       </template>
@@ -265,7 +265,7 @@ export default {
       //   })
     },
     goToCart(){
-      
+      this.$router.push({path: "/cart"})
     }
   }
 }
