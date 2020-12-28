@@ -10,7 +10,7 @@
                 <ul v-for="(item, k) of menuList" :key="k">
                   <li v-for="(sub, j) of item" :key="j">
                     <a :href="sub ? '/#/product/' + sub.id : ''">
-                      <img :src="sub ? sub.img : '/imgs/item-box-1.png'" alt />
+                      <img v-lazy="sub ? sub.img : '/imgs/item-box-1.png'" alt />
                       {{ sub.name || "小米9" }}
                     </a>
                   </li>
@@ -63,12 +63,12 @@
       </div>
       <div class="ads-box" v-if="adsList">
         <a :href="'/#/product/' + item.id" v-for="item of adsList" :key="item.id">
-          <img :src="item.img" alt />
+          <img v-lazy="item.img" alt />
         </a>
       </div>
       <div class="banner-box">
         <a href="/#/product/30">
-          <img src="../../public/imgs/banner-1.png" alt />
+          <img v-lazy="'/imgs/banner-1.png'" alt="">
         </a>
       </div>
     </div>
@@ -77,7 +77,7 @@
         <p class="product-title">手机</p>
         <div class="product-content">
           <a class="content-left" href="/#/product/35">
-            <img src="../../public/imgs/mix-alpha.jpg" alt />
+            <img v-lazy="'/imgs/mix-alpha.jpg'" alt />
           </a>
           <div class="product-right">
             <div class="product-list" v-for="(arr, i) of phoneList" :key="i">
@@ -92,7 +92,7 @@
                   :class="j % 2 == 0 ? 'new-pro' : 'kill-pro'"
                 >{{ j % 2 == 0 ? "新品" : "秒杀" }}</p>
                 <p class="imgs">
-                  <img :src="item.mainImage" alt />
+                  <img v-lazy="item.mainImage" alt />
                 </p>
                 <p class="name">{{ item.name }}</p>
                 <p class="remark">{{ item.subtitle }}</p>
