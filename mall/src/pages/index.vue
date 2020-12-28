@@ -28,7 +28,6 @@
               <a href="javascript:;">笔记本 平板</a>
               <div class="children">笔记本</div>
             </li>
-            1510754178
             <li class="menu-item">
               <a href="javascript:;">家电 插线板</a>
               <div class="children">家电</div>
