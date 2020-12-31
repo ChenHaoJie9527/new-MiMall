@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            overflow: hidden;
+            height: 20px;
+            position: relative;
+            background-color: #fffbe8;
+            padding: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            width: 50px;
+            color: #ed6a0c;
+            text-align: center;
+            height: 20px;
+            padding: 10px;
+            background-color: #fffbe8;
+        }
+
+        .jian {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: inline-block;
+            width: 50px;
+            color: #ed6a0c;
+            text-align: center;
+            height: 20px;
+            padding: 10px;
+            background-color: #fffbe8;
+        }
+
+        .text {
+            display: inline-block;
+            width: 500px;
+            margin-left: 100%;
+            animation: slidein 7s infinite linear;
+            word-break: break-word;
+            color: #ed6a0c;
+        }
+
+        @keyframes slidein {
+            0% {
+                margin-left: 100%;
+            }
+
+            50% {
+                margin-left: 0%;
+            }
+
+            100% {
+                margin-left: -100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <span class="close">X</span>
+        <span class="text">你当前有一笔订单未支付，点击查看详情信息。</span>
+        <span class="jian">></span>
+    </p>
+</body>
+
+</html>
