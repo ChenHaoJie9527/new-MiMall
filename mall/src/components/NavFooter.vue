@@ -25,6 +25,9 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/config.scss";
+%inlineBlick{
+  display: inline-block
+}
 .footer {
   height: 234px;
   background: $colorB;
@@ -46,14 +49,14 @@ export default {
   .footer-link {
     a {
       color: $colorD;
-      display: inline-block;
+      @extend %inlineBlick;
       &:hover {
         color: $colorA;
       }
     }
     span {
       padding: 0px 8px;
-      display: inline-block;
+      @extend %inlineBlick;
     }
   }
   .footer-copy {
